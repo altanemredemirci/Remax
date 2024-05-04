@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remax.UI", "Remax.UI\Remax.UI.csproj", "{16887A67-4829-4BF5-AEF2-FC442D1A4662}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16887A67-4829-4BF5-AEF2-FC442D1A4662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16887A67-4829-4BF5-AEF2-FC442D1A4662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16887A67-4829-4BF5-AEF2-FC442D1A4662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16887A67-4829-4BF5-AEF2-FC442D1A4662}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C81F1EA-9862-424A-AAF0-E5FCEF622F32}
+	EndGlobalSection
+EndGlobal
