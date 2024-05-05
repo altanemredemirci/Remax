@@ -14,6 +14,8 @@ namespace Remax.Entity
         public string Name { get; set; }
         [StringLength(50)]
         public string Title { get; set; }
+        [StringLength(200)]
+        public string ImageUrl { get; set; }
         [StringLength(300)]
         public string Comment { get; set; }
     }

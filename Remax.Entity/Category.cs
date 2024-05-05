@@ -12,6 +12,7 @@ namespace Remax.Entity
         public int Id { get; set; }
         [StringLength(40)]
         public string Name { get; set; }
+        public string Icon { get; set; }
         public bool Status { get; set; }
 
         public List<Product> Products { get; set; }
