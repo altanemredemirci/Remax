@@ -12,6 +12,9 @@ namespace Remax.UI.Controllers
             return View();
         }
 
-       
+       public IActionResult ProductDetail()
+        {
+            return View();
+        }
     }
 }
