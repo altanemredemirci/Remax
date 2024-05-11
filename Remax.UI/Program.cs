@@ -2,17 +2,28 @@ using Remax.BLL.Abstract;
 using Remax.BLL.Concrete;
 using Remax.DAL.Abstract;
 using Remax.DAL.Concrete.EfCore;
-using Remax.DAL.Concrete.PostgreSQL;
+using Remax.UI.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 //DEPENDENCY INJECTION
-builder.Services.AddScoped<IProductService, ProductManager>();             //AddSingleton//AddTransient//Add.Scoped 
+builder.Services.AddScoped<IProductService, ProductManager>(); 
 builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
+
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<ICategoryDal, EfCoreCategoryDal>();
+
+builder.Services.AddScoped<IAgencyService, AgencyManager>();
+builder.Services.AddScoped<IAgencyDal, EfCoreAgencyDal>();
+
+builder.Services.AddScoped<IClientService, ClientManager>();
+builder.Services.AddScoped<IClientDal, EfCoreClientDal>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
