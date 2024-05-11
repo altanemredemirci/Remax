@@ -28,6 +28,7 @@ namespace Remax.Entity
         [StringLength(50)]
         public string District { get; set; }
 
+        public bool IsFavorite { get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
