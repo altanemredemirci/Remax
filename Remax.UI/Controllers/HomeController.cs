@@ -1,5 +1,7 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Remax.BLL.Abstract;
+using Remax.BLL.DTOs.ProductDTO;
 using Remax.UI.Models;
 using System.Diagnostics;
 using System.Net.WebSockets;
@@ -8,20 +10,18 @@ namespace Remax.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductService _productService;
-
-        public HomeController(IProductService productService)
-        {
-            _productService = productService;
-        }
 
         public IActionResult Index()
-        {
-            var products = _productService.GetAll();
-            return View(products);
+        {           
+            return View();
         }
 
-       public IActionResult ProductDetail()
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public IActionResult ProductDetail()
         {
             return View();
         }

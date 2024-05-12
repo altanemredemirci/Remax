@@ -22,5 +22,7 @@ namespace Remax.DAL.Concrete.EfCore
         public DbSet<City> Cities { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Mail> Mails { get; set; }
     }
 }
