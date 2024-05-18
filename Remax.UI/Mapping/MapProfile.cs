@@ -13,7 +13,11 @@ namespace Remax.UI.Mapping
         public MapProfile()
         {
             CreateMap<Product, ResultProductDTO>().ReverseMap();
+
             CreateMap<Category, ResultCategoryDTO>().ReverseMap();
+            CreateMap<Category, CreateCategoryDTO>().ReverseMap();
+            CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
+
             CreateMap<Agency, ResultAgencyDTO>().ReverseMap();
             CreateMap<Client, ResultClientDTO>().ReverseMap();
             CreateMap<Contact, ResultContactDTO>().ReverseMap();

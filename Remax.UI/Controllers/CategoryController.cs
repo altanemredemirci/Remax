@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Remax.BLL.Abstract;
 using Remax.BLL.DTOs.CategoryDTO;
+using Remax.Entity;
 
 namespace Remax.UI.Controllers
 {
@@ -29,7 +30,7 @@ namespace Remax.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateCategoryDTO model, IFormFile file)
+        public async Task<IActionResult> Create(CreateCategoryDTO model, IFormFile file)
         {
             ModelState.Remove("Icon");
             ModelState.Remove("file");
@@ -39,9 +40,58 @@ namespace Remax.UI.Controllers
                 {
                     ModelState.AddModelError("", "Ikon yüklemelisiniz.");
                     return View(model);
-                } 
+                }
+
+                model.Icon= await ImageMethods.UploadImage(file);
+
+                _categoryService.Create(_mapper.Map<Category>(model));
+                return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+
+        public IActionResult Edit(int id)
+        {
+            var cat =_categoryService.GetById(id);
+
+            return View(_mapper.Map<UpdateCategoryDTO>(cat));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UpdateCategoryDTO dto, IFormFile file)
+        {
+            ModelState.Remove("Icon");
+            ModelState.Remove("file");
+            if (ModelState.IsValid)
+            {
+                var cat = _categoryService.GetById(dto.Id);
+
+                if (file != null)
+                {
+                    ImageMethods.DeleteImage(cat.Icon);
+                    
+                    dto.Icon= await ImageMethods.UploadImage(file);
+                }
+
+                _categoryService.Update(_mapper.Map<Category>(dto));
+
+                return RedirectToAction("Index");
+            }
+
+            return View(dto);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var cat = _categoryService.GetById(id);
+
+            _categoryService.Delete(cat);
+
+            ImageMethods.DeleteImage(cat.Icon);
+
+            return RedirectToAction("Index");
         }
     }
 }
