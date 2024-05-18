@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Remax.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Remax.Entity
+namespace Remax.BLL.DTOs.ProductDTO
 {
-    public class Product
+    public class CreateProductDTO
     {
-        public int Id { get; set; }
-
         [StringLength(100)]
         public string Title { get; set; }
 
@@ -18,7 +17,7 @@ namespace Remax.Entity
 
         [StringLength(200)]
         public string CoverImage { get; set; }
-       
+
         [StringLength(200)]
         public string Address { get; set; }
 
@@ -40,6 +39,5 @@ namespace Remax.Entity
 
         public int AgencyId { get; set; }
         public Agency Agency { get; set; }
-
     }
 }

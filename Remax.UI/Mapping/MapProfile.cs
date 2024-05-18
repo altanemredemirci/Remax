@@ -13,6 +13,7 @@ namespace Remax.UI.Mapping
         public MapProfile()
         {
             CreateMap<Product, ResultProductDTO>().ReverseMap();
+            CreateMap<Product, CreateProductDTO>().ReverseMap();
 
             CreateMap<Category, ResultCategoryDTO>().ReverseMap();
             CreateMap<Category, CreateCategoryDTO>().ReverseMap();

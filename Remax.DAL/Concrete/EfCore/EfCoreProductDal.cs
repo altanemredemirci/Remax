@@ -16,7 +16,7 @@ namespace Remax.DAL.Concrete.EfCore
         {
             using (var context = new DataContext())
             {
-                var products = context.Products.Include(i => i.Category).Include(i=> i.City).AsQueryable();
+                var products = context.Products.Include(i => i.Category).Include(i=> i.City).Include(i=> i.Agency).AsQueryable();
 
                 if (filter != null)
                     products = products.Where(filter);

@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Remax.DAL.Abstract
+namespace Remax.BLL.Abstract
 {
-    public interface ICityDal
+    public interface ICityService
     {
-        List<City> GetAll(Expression<Func<City, bool>> filter);
+        List<City> GetAll(Expression<Func<City,bool>> filter=null);
         City GetById(int id);
     }
 }
