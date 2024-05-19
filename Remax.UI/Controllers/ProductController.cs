@@ -72,7 +72,68 @@ namespace Remax.UI.Controllers
             return View(dto);
         }
 
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var product = _productService.GetById(id.Value);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.Agencies = _agencyService.GetAll();
+            ViewBag.Cities = _cityService.GetAll();
+
+            return View(_mapper.Map<UpdateProductDTO>(product));
+        }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UpdateProductDTO dto, IFormFile file)
+        {
+            ModelState.Remove("file");
+            ModelState.Remove("City");
+            ModelState.Remove("Agency");
+            ModelState.Remove("Category");
+            if (ModelState.IsValid)
+            {
+                var product = _productService.GetById(dto.Id);
+
+                if (file != null)
+                {
+                    ImageMethods.DeleteImage(product.CoverImage);
+                    dto.CoverImage = await ImageMethods.UploadImage(file);
+                }
+
+
+                _productService.Update(_mapper.Map<Product>(dto));
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.Agencies = _agencyService.GetAll();
+            ViewBag.Cities = _cityService.GetAll();
+
+            return View(dto);
+        }
+
+
+        public IActionResult StatusChange(int id)
+        {
+            var product = _productService.GetById(id);
+
+            product.Status = product.Status == true ? false : true;
+
+            _productService.Update(product);
+
+            return RedirectToAction("Index");
+        }
     }
 }

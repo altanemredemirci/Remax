@@ -14,6 +14,7 @@ namespace Remax.UI.Mapping
         {
             CreateMap<Product, ResultProductDTO>().ReverseMap();
             CreateMap<Product, CreateProductDTO>().ReverseMap();
+            CreateMap<Product, UpdateProductDTO>().ReverseMap();
 
             CreateMap<Category, ResultCategoryDTO>().ReverseMap();
             CreateMap<Category, CreateCategoryDTO>().ReverseMap();

@@ -17,7 +17,7 @@ namespace Remax.UI.ViewComponents.Home
 
         public IViewComponentResult Invoke()
         {
-            var products = _productService.GetAll().Where(i=> i.IsFavorite==true).ToList();
+            var products = _productService.GetAll().Where(i=> i.IsFavorite==true && i.Status == true).ToList();
 
             var models = _mapper.Map<List<ResultProductDTO>>(products);
             return View(models);
