@@ -14,8 +14,8 @@ namespace Remax.UI.Controllers
 
         public IActionResult GetDistricts(int cityId)
         {
-            var districts = _cityService.GetById(cityId);
-            return Json(districts.Districts);
+            var districts = _cityService.GetDistrictByCityId(cityId);
+            return Json(districts);
         }
     }
 }

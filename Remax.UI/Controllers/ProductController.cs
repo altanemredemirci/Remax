@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Remax.BLL.Abstract;
 using Remax.BLL.DTOs.ProductDTO;
+using Remax.Entity;
 
 namespace Remax.UI.Controllers
 {
@@ -39,9 +40,39 @@ namespace Remax.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreateProductDTO dto, IFormFile file)
+        public async Task<IActionResult> Create(CreateProductDTO dto, IFormFile file)
         {
-            return View();
+            ModelState.Remove("CoverImage");
+            ModelState.Remove("City");
+            ModelState.Remove("Agency");
+            ModelState.Remove("Category");
+            ModelState.Remove("file");
+            if (ModelState.IsValid)
+            {
+                if (file == null)
+                {
+                    ModelState.AddModelError("", "Resim yüklenemeli.");
+
+                    ViewBag.Categories = _categoryService.GetAll();
+                    ViewBag.Agencies = _agencyService.GetAll();
+                    ViewBag.Cities = _cityService.GetAll();
+                    return View(dto);
+                }
+
+                dto.CoverImage = await ImageMethods.UploadImage(file);
+                dto.Status = true;
+
+                _productService.Create(_mapper.Map<Product>(dto));
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.Agencies = _agencyService.GetAll();
+            ViewBag.Cities = _cityService.GetAll();
+            return View(dto);
         }
+
+
+
     }
 }

@@ -22,11 +22,11 @@ namespace Remax.DAL.Concrete.EfCore
             }
         }
 
-        public City GetById(int id)
+        public List<District> GetDistrictByCityId(int id)
         {
             using (var context = new DataContext())
             {
-                return context.Cities.Include(i=> i.Districts).FirstOrDefault(i=> i.Id==id);
+                return context.Districts.Where(i => i.CityId == id).ToList();
             }
         }
     }

@@ -11,6 +11,6 @@ namespace Remax.BLL.Abstract
     public interface ICityService
     {
         List<City> GetAll(Expression<Func<City,bool>> filter=null);
-        City GetById(int id);
+        List<District> GetDistrictByCityId(int id);
     }
 }

@@ -24,9 +24,9 @@ namespace Remax.BLL.Concrete
             return _cityDal.GetAll(filter);
         }
 
-        public City GetById(int id)
+        public List<District> GetDistrictByCityId(int id)
         {
-            return _cityDal.GetById(id);
+            return _cityDal.GetDistrictByCityId(id);
         }
     }
 }

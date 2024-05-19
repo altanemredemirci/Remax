@@ -11,6 +11,6 @@ namespace Remax.DAL.Abstract
     public interface ICityDal
     {
         List<City> GetAll(Expression<Func<City, bool>> filter);
-        City GetById(int id);
+        List<District> GetDistrictByCityId(int id);
     }
 }
