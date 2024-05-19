@@ -21,6 +21,10 @@ namespace Remax.UI.Mapping
             CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
 
             CreateMap<Agency, ResultAgencyDTO>().ReverseMap();
+            CreateMap<Agency, CreateAgencyDTO>().ReverseMap();
+            CreateMap<Agency, UpdateAgencyDTO>().ReverseMap();
+
+
             CreateMap<Client, ResultClientDTO>().ReverseMap();
             CreateMap<Contact, ResultContactDTO>().ReverseMap();
         }
