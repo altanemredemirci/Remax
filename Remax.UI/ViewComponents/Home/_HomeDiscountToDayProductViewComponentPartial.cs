@@ -22,5 +22,7 @@ namespace Remax.UI.ViewComponents.Home
             var models = _mapper.Map<List<ResultProductDTO>>(products);
             return View(models);
         }
+
+
     }
 }

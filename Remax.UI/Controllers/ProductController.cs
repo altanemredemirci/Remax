@@ -124,6 +124,15 @@ namespace Remax.UI.Controllers
             return View(dto);
         }
 
+        public IActionResult Delete(int id)
+        {
+            var product = _productService.GetById(id);
+
+            _productService.Delete(product);
+            ImageMethods.DeleteImage(product.CoverImage);
+            return RedirectToAction("Index");
+        }
+        
 
         public IActionResult StatusChange(int id)
         {
