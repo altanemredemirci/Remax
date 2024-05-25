@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Remax.DAL.Concrete.EfCore;
 
@@ -10,9 +11,11 @@ using Remax.DAL.Concrete.EfCore;
 namespace Remax.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240525134555_AddingSliderEntity")]
+    partial class AddingSliderEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,31 +215,6 @@ namespace Remax.DAL.Migrations
                     b.ToTable("Districts");
                 });
 
-            modelBuilder.Entity("Remax.Entity.Employment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("WhoWeAreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WhoWeAreId");
-
-                    b.ToTable("Employments");
-                });
-
             modelBuilder.Entity("Remax.Entity.Mail", b =>
                 {
                     b.Property<int>("Id")
@@ -407,10 +385,6 @@ namespace Remax.DAL.Migrations
                     b.Property<string>("ImageUrl2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Page")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -418,31 +392,6 @@ namespace Remax.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sliders");
-                });
-
-            modelBuilder.Entity("Remax.Entity.WhoWeAre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WhoWeAres");
                 });
 
             modelBuilder.Entity("Remax.Entity.District", b =>
@@ -454,17 +403,6 @@ namespace Remax.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
-                });
-
-            modelBuilder.Entity("Remax.Entity.Employment", b =>
-                {
-                    b.HasOne("Remax.Entity.WhoWeAre", "WhoWeAre")
-                        .WithMany("Employments")
-                        .HasForeignKey("WhoWeAreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WhoWeAre");
                 });
 
             modelBuilder.Entity("Remax.Entity.Product", b =>
@@ -520,11 +458,6 @@ namespace Remax.DAL.Migrations
                     b.Navigation("Districts");
 
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Remax.Entity.WhoWeAre", b =>
-                {
-                    b.Navigation("Employments");
                 });
 #pragma warning restore 612, 618
         }

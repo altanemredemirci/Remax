@@ -11,12 +11,10 @@
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <h1 class="mb-4"># @Model.Title</h1>
                 <p class="mb-4">@Model.Description</p>
-                @foreach (var item in Model.Employments.Where(i => i.Status == true).ToList())
+                @foreach (var item in Model.Employments.Where(i=> i.Status==true).ToList())
                 {
                     <p><i class="fa fa-check text-primary me-3"></i>@item.Text</p>
                 }
-
-                <a class="btn btn-primary py-3 px-5 mt-3" href="/Home/About">Daha Fazla..</a>
             </div>
         </div>
     </div>

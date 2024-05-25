@@ -24,5 +24,8 @@ namespace Remax.DAL.Concrete.EfCore
         public DbSet<Client> Clients { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Mail> Mails { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
+        public DbSet<WhoWeAre> WhoWeAres { get; set; }
+        public DbSet<Employment> Employments { get; set; }
     }
 }

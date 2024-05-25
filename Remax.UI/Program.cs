@@ -30,6 +30,12 @@ builder.Services.AddScoped<IContactDal, EfCoreContactDal>();
 builder.Services.AddScoped<ICityService, CityManager>();
 builder.Services.AddScoped<ICityDal, EfCoreCityDal>();
 
+builder.Services.AddScoped<ISliderService, SliderManager>();
+builder.Services.AddScoped<ISliderDal, EfCoreSliderDal>();
+
+builder.Services.AddScoped<IWhoWeAreService, WhoWeAreManager>();
+builder.Services.AddScoped<IWhoWeAreDal, EfCoreWhoWeAreDal>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
