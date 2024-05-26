@@ -35,5 +35,10 @@ namespace Remax.UI.Controllers
         {
             return View();
         }
+
+        public IActionResult AgencyList()
+        {
+            return View();
+        }
     }
 }
