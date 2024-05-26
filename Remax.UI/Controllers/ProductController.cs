@@ -47,6 +47,7 @@ namespace Remax.UI.Controllers
             ModelState.Remove("Agency");
             ModelState.Remove("Category");
             ModelState.Remove("file");
+            ModelState.Remove("PublishDate");
             if (ModelState.IsValid)
             {
                 if (file == null)
@@ -61,7 +62,7 @@ namespace Remax.UI.Controllers
 
                 dto.CoverImage = await ImageMethods.UploadImage(file);
                 dto.Status = true;
-
+                dto.PublishDate = DateTime.Now;
                 _productService.Create(_mapper.Map<Product>(dto));
                 return RedirectToAction("Index");
             }
@@ -102,6 +103,7 @@ namespace Remax.UI.Controllers
             ModelState.Remove("City");
             ModelState.Remove("Agency");
             ModelState.Remove("Category");
+            ModelState.Remove("PublishDate");
             if (ModelState.IsValid)
             {
                 var product = _productService.GetById(dto.Id);
@@ -112,7 +114,7 @@ namespace Remax.UI.Controllers
                     dto.CoverImage = await ImageMethods.UploadImage(file);
                 }
 
-
+                dto.PublishDate = DateTime.Now;
                 _productService.Update(_mapper.Map<Product>(dto));
                 return RedirectToAction("Index");
             }

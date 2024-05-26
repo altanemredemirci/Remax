@@ -33,6 +33,8 @@ namespace Remax.BLL.DTOs.ProductDTO
 
         public bool Status { get; set; }
 
+        public DateTime PublishDate { get; set; }
+
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 

@@ -21,7 +21,7 @@ namespace Remax.DAL.Concrete.EfCore
                 if (filter != null)
                     products = products.Where(filter);
 
-                return products.ToList();
+                return products.OrderByDescending(i=> i.PublishDate).ToList();
 
             }
         }
