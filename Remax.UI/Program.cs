@@ -39,6 +39,9 @@ builder.Services.AddScoped<ISliderDal, EfCoreSliderDal>();
 builder.Services.AddScoped<IWhoWeAreService, WhoWeAreManager>();
 builder.Services.AddScoped<IWhoWeAreDal, EfCoreWhoWeAreDal>();
 
+builder.Services.AddScoped<IMailService, MailManager>();
+builder.Services.AddScoped<IMailDal, EfCoreMailDal>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
