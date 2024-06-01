@@ -3,6 +3,7 @@ using Remax.BLL.DTOs.AgencyDTO;
 using Remax.BLL.DTOs.CategoryDTO;
 using Remax.BLL.DTOs.ClientDTO;
 using Remax.BLL.DTOs.ContactDTO;
+using Remax.BLL.DTOs.ProductDetailDTO;
 using Remax.BLL.DTOs.ProductDTO;
 using Remax.BLL.DTOs.SliderDTO;
 using Remax.BLL.DTOs.WhoWeAreDTO;
@@ -18,6 +19,8 @@ namespace Remax.UI.Mapping
             CreateMap<Product, CreateProductDTO>().ReverseMap();
             CreateMap<Product, UpdateProductDTO>().ReverseMap();
 
+            CreateMap<ProductDetail, ResultProductDetailDTO>().ReverseMap();
+
             CreateMap<Category, ResultCategoryDTO>().ReverseMap();
             CreateMap<Category, CreateCategoryDTO>().ReverseMap();
             CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
@@ -30,7 +33,9 @@ namespace Remax.UI.Mapping
             CreateMap<Client, ResultClientDTO>().ReverseMap();
             CreateMap<Contact, ResultContactDTO>().ReverseMap();
             CreateMap<Slider, ResultSliderDTO>().ReverseMap();
+
             CreateMap<WhoWeAre, ResultWhoWeAreDTO>().ReverseMap();
+            CreateMap<WhoWeAre, UpdateWhoWeAreDTO>().ReverseMap();
         }
     }
 }

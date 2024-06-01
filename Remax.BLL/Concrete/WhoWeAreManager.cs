@@ -39,7 +39,7 @@ namespace Remax.BLL.Concrete
             return _whoWeAreDal.GetById(id);
         }
 
-        public WhoWeAre GetOne(Expression<Func<WhoWeAre, bool>> filter)
+        public WhoWeAre GetOne(Expression<Func<WhoWeAre, bool>> filter = null)
         {
             return _whoWeAreDal.GetOne(filter);
         }

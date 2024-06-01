@@ -26,9 +26,9 @@ namespace Remax.UI.Controllers
             return View();
         }
 
-        public IActionResult ProductDetail()
+        public IActionResult ProductDetail(int id)
         {
-            return View();
+            return View(id);
         }
 
         public IActionResult ProductList()

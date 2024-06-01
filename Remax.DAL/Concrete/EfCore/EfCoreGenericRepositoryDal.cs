@@ -49,11 +49,13 @@ namespace Remax.DAL.Concrete.EfCore
             }
         }
 
-        public T GetOne(Expression<Func<T, bool>> filter)
+        public virtual T GetOne(Expression<Func<T, bool>> filter)
         {
             using (var context = new TContext())
             {
-                return context.Set<T>().Where(filter).FirstOrDefault();
+                return filter==null
+                    ? context.Set<T>().FirstOrDefault()  
+                    : context.Set<T>().Where(filter).FirstOrDefault();
             }
         }
 

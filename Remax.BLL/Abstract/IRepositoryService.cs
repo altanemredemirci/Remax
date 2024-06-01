@@ -15,7 +15,7 @@ namespace Remax.BLL.Abstract
         void Delete(T entity);
 
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
-        T GetOne(Expression<Func<T, bool>> filter);
+        T GetOne(Expression<Func<T, bool>> filter=null);
         T GetById(int id);
     }
 }

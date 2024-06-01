@@ -238,6 +238,28 @@ namespace Remax.DAL.Migrations
                     b.ToTable("Employments");
                 });
 
+            modelBuilder.Entity("Remax.Entity.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductDetailId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductDetailId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("Remax.Entity.Mail", b =>
                 {
                     b.Property<int>("Id")
@@ -368,9 +390,6 @@ namespace Remax.DAL.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -471,6 +490,17 @@ namespace Remax.DAL.Migrations
                     b.Navigation("WhoWeAre");
                 });
 
+            modelBuilder.Entity("Remax.Entity.Image", b =>
+                {
+                    b.HasOne("Remax.Entity.ProductDetail", "ProductDetail")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductDetail");
+                });
+
             modelBuilder.Entity("Remax.Entity.Product", b =>
                 {
                     b.HasOne("Remax.Entity.Agency", "Agency")
@@ -524,6 +554,11 @@ namespace Remax.DAL.Migrations
                     b.Navigation("Districts");
 
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Remax.Entity.ProductDetail", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("Remax.Entity.WhoWeAre", b =>

@@ -27,8 +27,6 @@ namespace Remax.Entity
         [StringLength(500)]
         public string Description { get; set; }
 
-        public decimal Price { get; set; }
-
         [StringLength(500)]
         public string Location { get; set; }
 
@@ -37,5 +35,7 @@ namespace Remax.Entity
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
+
+        public List<Image> Images { get; set; }
     }
 }

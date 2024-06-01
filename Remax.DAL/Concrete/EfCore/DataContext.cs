@@ -27,5 +27,6 @@ namespace Remax.DAL.Concrete.EfCore
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<WhoWeAre> WhoWeAres { get; set; }
         public DbSet<Employment> Employments { get; set; }
+        public DbSet<Image> Images { get; set; }
     }
 }
