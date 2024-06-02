@@ -28,11 +28,144 @@
                     }
                     else
                     {
-                        <a href="/Mail/StatusChange?id=@item.Id" class="btn btn-outline-warning">Okunmadı</a>
+                       
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#readMail" onclick="readMail('@item.Name','@item.Email','@item.Subject','@item.Message',@item.Id)">
+                            Okunmadı
+                        </button>
                     }
                 </td>
-
+                <td>
+                    @if (item.IsReply == false)
+                    {
+                        <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#replyMail" onclick="MailReply('@item.Name','@item.Email','@item.Subject',@item.Id)">
+                            Yanıtla
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-outline-primary">
+                            Yanıtlandı
+                        </button>
+                    }
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="readMail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mail İçeriği</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Mail/StatusChange">
+                    <input type="hidden" name="id" id="id" value="" />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" name="name" value="" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email" name="email" value="" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="subject" name="subject" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12  mt-2">
+                        <div class="form-group">
+                            <textarea class="form-control" name="Message" id="message" style="height: 150px" readonly></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary">Kapat</button>
+                    </div>
+                </form>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="replyMail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mail Cevaplama</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Mail/ReplyMail">
+                    <input type="hidden" name="Id" id="Id" value="" />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="sendername" name="name" value="" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="senderemail" name="email" value="" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="sendersubject" name="subject" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12  mt-2">
+                        <div class="form-group">
+                            <textarea class="form-control" name="Message" style="height: 150px"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-primary toastrDefaultSuccess">Yanıtla</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function readMail(name, email, subject, message, id) {
+        document.getElementById("name").value=name
+        document.getElementById("email").value=email
+        document.getElementById("subject").value=subject
+        document.getElementById("message").value=message
+        document.getElementById("id").value=id
+    }
+
+    function MailReply(name, email, subject, id) {
+        document.getElementById("sendername").value = name
+        document.getElementById("senderemail").value = email
+        document.getElementById("sendersubject").value = subject
+        document.getElementById("Id").value = id
+    }
+</script>

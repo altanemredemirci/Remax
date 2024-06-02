@@ -25,5 +25,6 @@ namespace Remax.Entity
 
         public DateTime SendDate { get; set; }
         public bool IsRead { get; set; }
+        public bool IsReply { get; set; }
     }
 }

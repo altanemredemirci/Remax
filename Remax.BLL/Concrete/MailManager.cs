@@ -36,7 +36,7 @@ namespace Remax.BLL.Concrete
 
         public Mail GetById(int id)
         {
-            throw new NotImplementedException();
+            return _mailDal.GetById(id);
         }
 
         public Mail GetOne(Expression<Func<Mail, bool>> filter = null)
@@ -46,7 +46,7 @@ namespace Remax.BLL.Concrete
 
         public void Update(Mail entity)
         {
-            throw new NotImplementedException();
+            _mailDal.Update(entity);
         }
     }
 }
