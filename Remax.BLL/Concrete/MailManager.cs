@@ -31,7 +31,7 @@ namespace Remax.BLL.Concrete
 
         public List<Mail> GetAll(Expression<Func<Mail, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return _mailDal.GetAll(filter);
         }
 
         public Mail GetById(int id)
