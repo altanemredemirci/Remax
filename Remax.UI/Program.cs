@@ -42,6 +42,9 @@ builder.Services.AddScoped<IWhoWeAreDal, EfCoreWhoWeAreDal>();
 builder.Services.AddScoped<IMailService, MailManager>();
 builder.Services.AddScoped<IMailDal, EfCoreMailDal>();
 
+builder.Services.AddScoped<IStatisticService, StatisticManager>();
+builder.Services.AddScoped<IStatisticDal, EfCoreStatisticDal>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
