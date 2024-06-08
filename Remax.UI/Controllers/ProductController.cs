@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Remax.BLL.Abstract;
+using Remax.BLL.DTOs.ProductDetailDTO;
 using Remax.BLL.DTOs.ProductDTO;
 using Remax.Entity;
 
@@ -9,18 +10,20 @@ namespace Remax.UI.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private readonly IProductDetailService _productDetailService;
         private readonly ICategoryService _categoryService;
         private readonly IAgencyService _agencyService;
         private readonly ICityService _cityService;
         private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService, IMapper mapper,ICategoryService categoryService,IAgencyService agencyService,ICityService cityService)
+        public ProductController(IProductService productService, IMapper mapper,ICategoryService categoryService,IAgencyService agencyService,ICityService cityService,IProductDetailService productDetailService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _mapper = mapper;
             _agencyService = agencyService;
             _cityService = cityService;
+            _productDetailService = productDetailService;
         }
 
         public IActionResult Index()
@@ -35,41 +38,57 @@ namespace Remax.UI.Controllers
             ViewBag.Agencies = _agencyService.GetAll();
             ViewBag.Cities = _cityService.GetAll();
 
-            return View(new CreateProductDTO());
+            return View(new CreateProductDetailDTO());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateProductDTO dto, IFormFile file)
+        public async Task<IActionResult> Create(CreateProductDetailDTO dto, IFormFile file, IFormFile[] files)
         {
-            ModelState.Remove("CoverImage");
-            ModelState.Remove("City");
-            ModelState.Remove("Agency");
-            ModelState.Remove("Category");
-            ModelState.Remove("file");
-            ModelState.Remove("PublishDate");
+            ModelState.Remove("Product.CoverImage");
+            ModelState.Remove("Product.City");
+            ModelState.Remove("Product.Agency");
+            ModelState.Remove("Product.Category");
             if (ModelState.IsValid)
             {
                 if (file == null)
                 {
-                    ModelState.AddModelError("", "Resim yüklenemeli.");
-
+                    ViewBag.Cities = _cityService.GetAll();
                     ViewBag.Categories = _categoryService.GetAll();
                     ViewBag.Agencies = _agencyService.GetAll();
-                    ViewBag.Cities = _cityService.GetAll();
+                    ModelState.AddModelError("", "Ana resim için dosya yüklenmedi.");
                     return View(dto);
                 }
 
-                dto.CoverImage = await ImageMethods.UploadImage(file);
-                dto.Status = true;
+                if (files.Length == 0)
+                {
+                    ViewBag.Cities = _cityService.GetAll();
+                    ViewBag.Categories = _categoryService.GetAll();
+                    ViewBag.Agencies = _agencyService.GetAll();
+                    ModelState.AddModelError("", "İlan Detay Resimleri yüklenmedi.");
+                    return View(dto);
+                }
+
+                dto.Product.CoverImage = await ImageMethods.UploadImage(file);
+
+                foreach (var item in files)
+                {
+                    Entity.Image image = new Entity.Image();
+                    image.ImageUrl = await ImageMethods.UploadImage(item);
+                    dto.Images.Add(image);
+                }
+                dto.Product.Status = true;
                 dto.PublishDate = DateTime.Now;
-                _productService.Create(_mapper.Map<Product>(dto));
+                //_productService.Create(_mapper.Map<Product>(dto.Product));
+                _productDetailService.Create(_mapper.Map<ProductDetail>(dto));
+
                 return RedirectToAction("Index");
+
             }
 
+            ViewBag.Cities = _cityService.GetAll();
             ViewBag.Categories = _categoryService.GetAll();
             ViewBag.Agencies = _agencyService.GetAll();
-            ViewBag.Cities = _cityService.GetAll();
             return View(dto);
         }
 

@@ -41,5 +41,5 @@ namespace Remax.BLL.DTOs.ProductDTO
 
         public int AgencyId { get; set; }
         public Agency Agency { get; set; }
-    }
+            }
 }
