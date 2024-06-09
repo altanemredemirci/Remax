@@ -99,7 +99,7 @@ namespace Remax.UI.Controllers
                 return BadRequest();
             }
 
-            var product = _productService.GetById(id.Value);
+            var product = _productDetailService.GetById(id.Value);
 
             if (product == null)
             {
@@ -110,7 +110,7 @@ namespace Remax.UI.Controllers
             ViewBag.Agencies = _agencyService.GetAll();
             ViewBag.Cities = _cityService.GetAll();
 
-            return View(_mapper.Map<UpdateProductDTO>(product));
+            return View(_mapper.Map<UpdateProductDetailDTO>(product));
         }
 
 

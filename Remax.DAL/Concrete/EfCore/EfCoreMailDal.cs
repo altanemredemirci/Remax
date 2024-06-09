@@ -8,7 +8,14 @@ using System.Threading.Tasks;
 
 namespace Remax.DAL.Concrete.EfCore
 {
-    public class EfCoreMailDal:EfCoreGenericRepositoryDal<Mail,DataContext>, IMailDal
+    public class EfCoreMailDal : EfCoreGenericRepositoryDal<Mail, DataContext>, IMailDal
     {
+        public List<Mail> GetLast4()
+        {
+            using (var context = new DataContext())
+            {
+                return context.Mails.Where(i => i.IsRead == false).OrderByDescending(i => i.SendDate).Take(4).ToList();
+            }
+        }
     }
 }

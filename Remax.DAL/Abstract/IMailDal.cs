@@ -9,5 +9,6 @@ namespace Remax.DAL.Abstract
 {
     public interface IMailDal:IRepository<Mail>
     {
+        List<Mail> GetLast4();
     }
 }

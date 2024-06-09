@@ -39,6 +39,11 @@ namespace Remax.BLL.Concrete
             return _mailDal.GetById(id);
         }
 
+        public List<Mail> GetLast4()
+        {
+            return _mailDal.GetLast4();
+        }
+
         public Mail GetOne(Expression<Func<Mail, bool>> filter = null)
         {
             throw new NotImplementedException();

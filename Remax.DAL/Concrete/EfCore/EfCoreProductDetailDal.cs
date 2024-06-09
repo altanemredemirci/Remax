@@ -18,7 +18,11 @@ namespace Remax.DAL.Concrete.EfCore
                 return context.ProductDetails
                     .Include(i => i.Images)
                     .Include(i => i.Product)
-                    .ThenInclude(i => i.Agency).FirstOrDefault(i => i.Id == id);
+                    .ThenInclude(i => i.Agency)
+                    .Include(i=> i.Product)
+                    .ThenInclude(i=>i.Category)
+                    .Include(i => i.Product)
+                    .ThenInclude(i => i.City).FirstOrDefault(i => i.ProductId == id);
             }
         }
     }

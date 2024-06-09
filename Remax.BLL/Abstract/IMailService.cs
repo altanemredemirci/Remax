@@ -9,5 +9,6 @@ namespace Remax.BLL.Abstract
 {
     public interface IMailService:IRepositoryService<Mail>
     {
+        List<Mail> GetLast4();
     }
 }

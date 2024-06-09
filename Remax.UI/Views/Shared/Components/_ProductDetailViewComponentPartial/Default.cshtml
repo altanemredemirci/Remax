@@ -5,24 +5,20 @@
     <div class="container">
         <div class="row g-0 mx-auto gx-5 align-items-end wow slideInRight">
             <ul class="nav nav-pills d-inline-flex justify-content-start mb-3">
+                
                 <li class="nav-item me-2">
-                    <h6> <span class="badge bg-success">Buy</span></h6>
+                    <h6> <span class="badge bg-success">@Model.Product.Type</span></h6>
                 </li>
                 <li class="nav-item me-2">
-                    <h6> <span class="badge bg-success">Rent</span></h6>
+                    <h6> <span class="badge bg-success"> <span class="far fa-clock"></span> @Model.Product.PublishDate.ToShortDateString()</span></h6>
                 </li>
-                <li class="nav-item me-2">
-                <li><span class="far fa-clock"></span> 5 months ago</li>
-                </li>
-                <li class="nav-item me-2">
-                <li><span class="fa fa-eye"></span> 250 views</li>
-                </li>
+                
             </ul>
         </div>
         <div class="row g-0 gx-5 align-items-end">
             <div class="col-lg-6">
                 <div class="text-start mx-auto mb-3 wow slideInLeft" data-wow-delay="0.1s">
-                    <h1 class="mb-3">Property Listing</h1>
+                    <h1 class="mb-3">İlan Detayları</h1>
                 </div>
             </div>
         </div>
@@ -36,12 +32,14 @@
                                 <div id="carouselExampleControls" class="carousel slide"
                                      data-bs-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="~/realestate/img/property-1.jpg" class="d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="~/realestate/img/property-2.jpg" class="d-block w-100" alt="...">
-                                        </div>
+                                        @foreach (var item in Model.Images)
+                                        {
+                                            <div class="carousel-item @(Model.Images[0].ImageUrl==item.ImageUrl? "active":"")">
+                                                <img src="~/realestate/img/@item.ImageUrl" class="d-block w-100" alt="...">
+                                            </div>
+                                        }
+                                      
+                                      
                                     </div>
                                     <button class="carousel-control-prev" type="button"
                                             data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -55,81 +53,55 @@
                                     </button>
                                 </div>
                                 <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                    For Sell
+                                    @Model.Product.Type
                                 </div>
                                 <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                    Appartment
+                                    @Model.Product.Category.Name
                                 </div>
                             </div>
                             <div class="p-4 pb-0">
-                                <h5 class="text-primary mb-3">$12,345</h5>
-                                <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
+                                <h5 class="text-primary mb-3">₺ @Model.Product.Price</h5>
+                                <a class="d-block h5 mb-2" href="">@Model.Product.Title</a>
                                 <p>
-                                    <i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York,
-                                    USA
+                                    <i class="fa fa-map-marker-alt text-primary me-2"></i>@Model.Product.Address, @Model.Product.District,
+                                    @Model.Product.City.Name
                                 </p>
                             </div>
                             <div class="d-flex border-top">
                                 <small class="flex-fill text-center border-end py-2">
-                                    <i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft
+                                    <i class="fa fa-ruler-combined text-primary me-2"></i>@Model.Size m<sup>2</sup>
                                 </small>
                                 <small class="flex-fill text-center border-end py-2">
-                                    <i class="fa fa-bed text-primary me-2"></i>3 Bed
+                                    <i class="fa fa-bed text-primary me-2"></i>@Model.BedRoomCount Yatak Odası
                                 </small>
                                 <small class="flex-fill text-center py-2">
-                                    <i class="fa fa-bath text-primary me-2"></i>2 Bath
+                                    <i class="fa fa-bath text-primary me-2"></i>@Model.BathCount Banyo
                                 </small>
                             </div>
                         </div>
                         <div class="single-post-content mt-3">
-                            <h3 class="post-content-title mb-3">Description</h3>
+                            <h3 class="post-content-title mb-3">Açıklama</h3>
                             <p class="mb-4">
-                                Lorem model text, and a search for 'lorem ipsum' will uncover many web sites still in their
-                                infancy. Various
-                                versions have evolved over the years, sometimes by accident, sometimes on purpose
-                                injected humour and the like.
+                                @Model.Description
                             </p>
-                            <p class="mb-4">
-                                When you decide to put your business online it is a little bet tricky step
-                                for novice
-                                computer users because they want to keep data safe & secure.
-                                This problem developed from companies which did not take security seriously. Lorem ipsum
-                                dolor sit amet elit.
-                            </p>
+                           
                             <div class="property-item p-4 mb-4">
-                                <h3 class="post-content-title mb-4">Property detail</h3>
-                                <ul class="details-list p-0">
-                                    <li><strong>Property id :</strong> PRPT12345 </li>
-                                    <li><strong>Property size :</strong> 1200sqft </li>
-                                    <li><strong>Rooms :</strong> 2 </li>
-                                    <li><strong>Bedrooms :</strong> 5 </li>
-                                    <li><strong>Bathrooms :</strong> 2 </li>
-                                    <li><strong>Exterior material :</strong> Brick </li>
-                                    <li><strong>Structure type :</strong> Wood </li>
-                                    <li><strong>Garage size :</strong> 15 cars </li>
-                                    <li><strong>Garages :</strong> 15 </li>
-                                    <li><strong>Property Price :</strong> $ 750 </li>
-                                    <li><strong>Built Year :</strong> 2018 </li>
-                                    <li><strong>Avaiable from :</strong> Aug 2019 </li>
+                                <h3 class="post-content-title mb-4">İlan Detayı</h3>
+                                <ul class="details-list p-0">                                 
+                                    <li><strong>Metrekare :</strong> @Model.Size m<sup>2</sup></li>
+                                    <li><strong>Oda Sayısı :</strong> @Model.RoomCount </li>
+                                    <li><strong>Yatak Odası :</strong> @Model.BedRoomCount </li>
+                                    <li><strong>Banyo :</strong> @Model.BathCount </li>
+                                    <li><strong>Garaj :</strong> @Model.GarageSize </li>
+                                    <li><strong>İlan Fiyatı :</strong> ₺ @Model.Product.Price </li>
+                                    <li><strong>İnşa Yılı :</strong> @Model.BuildYear </li>
                                 </ul>
-                            </div>
+                            </div>                          
                             <div class="property-item p-4 mb-4">
-                                <h3 class="post-content-title mb-4">Amenities</h3>
-                                <ul class="details-list p-0">
-                                    <li><strong>Air Conditioning </strong></li>
-                                    <li><strong>Buil-In Wardrobes </strong> </li>
-                                    <li><strong>Dishwasher</strong> </li>
-                                    <li><strong>Floor Coverings </strong> </li>
-                                    <li><strong>Medical / Clinic </strong> </li>
-                                    <li><strong>Fencing</strong> </li>
-                                    <li><strong>Internet and wifi </strong> </li>
-                                </ul>
-                            </div>
-                            <div class="property-item p-4 mb-4">
-                                <h3 class="post-content-title mb-4">Location</h3>
+                                <h3 class="post-content-title mb-4">Lokasyon</h3>
                                 <div class="agent-map">
 
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24096.12774892419!2d29.04245348899319!3d40.981131166657164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac790b17ba89d%3A0xd2d24ea0437a7ee2!2zS2FkxLFrw7Z5L8Swc3RhbmJ1bA!5e0!3m2!1str!2str!4v1706715011721!5m2!1str!2str" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                 @Html.Raw(Model.Location)
 
 
                                 </div>
@@ -138,8 +110,7 @@
                             <div class="property-item p-4 mb-4">
                                 <h3 class="post-content-title mb-4">Video</h3>
                                 <div class="post-content">
-                                    <iframe src="https://www.youtube.com/embed/jqP3m3ElcxA" width="100%" height="450" frameborder="0"
-                                            allowfullscreen=""></iframe>
+                                    @Html.Raw(Model.VideoUrl)
                                 </div>
                             </div>
                         </div>
@@ -150,63 +121,29 @@
 
                         <div class="row g-0 property-item rounded overflow-hidden">
                             <div class="sidebar-title p-4">
-                                <h4>Contact an Agent</h4>
+                                <h4>Acente Bilgileri</h4>
                             </div>
                             <div class="col-md-4">
-                                <img src="~/realestate/img/call-to-action.jpg" class="img-fluid rounded-start  w-100">
+                                <img src="~/realestate/img/@Model.Product.Agency.ImageUrl" class="img-fluid rounded-start  w-100">
                             </div>
                             <div class="col-md-8">
-                                <h5 class="card-title">Company realty</h5>
+                                <h5 class="card-title">@Model.Product.Agency.Name</h5>
                                 <div class="card-body">
                                     <div>
-                                        <p>+(12) 324 567 89
+                                        <p>@Model.Product.Agency.Phone
                                         <p>
                                     </div>
                                     <div>
-                                        <p>companyrealty@mail.com</p>
+                                        <p>@Model.Product.Agency.Email</p>
                                     </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-style w-100">
-                                Request
-                                details
+                               İletişime Geç
                             </button>
                         </div>
 
-                        <div class="row g-0 property-item rounded overflow-hidden mt-5 p-4">
-                            <div class="sidebar-title p-4">
-                                <h4>Popular Post</h4>
-                            </div>
-                            <div class="col-md-4">
-                                <img src="~/realestate/img/l2.jpg" class="img-fluid rounded-start  w-80">
-                            </div>
-                            <div class="col-md-8">
-                                <h5 class="card-title">Why we are the best in the business</h5>
-                                <div class="card-body">
-                                    <p>Sep 09, 2020 - 2 comments</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="col-md-4">
-                                <img src="~/realestate/img/l1.jpg" class="img-fluid rounded-start  w-80">
-                            </div>
-                            <div class="col-md-8">
-                                <h5 class="card-title">Why we are the best in the business</h5>
-                                <div class="card-body">
-                                    <p>Sep 09, 2020 - 2 comments</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="col-md-4">
-                                <img src="~/realestate/img/l3.jpg" class="img-fluid rounded-start  w-100">
-                            </div>
-                            <div class="col-md-8">
-                                <h5 class="card-title">Why we are the best in the business</h5>
-                                <div class="card-body">
-                                    <p>Sep 09, 2020 - 2 comments</p>
-                                </div>
-                            </div>
-                        </div>
+                        @await Component.InvokeAsync("_ProductDetailPopularPostViewComponentPartial")
                     </div>
                     <!-- Call to Action End -->
                 </div>
