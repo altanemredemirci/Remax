@@ -2,6 +2,7 @@ using Remax.BLL.Abstract;
 using Remax.BLL.Concrete;
 using Remax.DAL.Abstract;
 using Remax.DAL.Concrete.EfCore;
+using Remax.UI.Hubs;
 using Remax.UI.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
+
+builder.Services.AddCors(opt =>
+    opt.AddPolicy("CorsPolicy", builder =>
+         builder.AllowCredentials()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed((host) => true)
+    ));
+
+builder.Services.AddSignalR();
 
 //DEPENDENCY INJECTION
 builder.Services.AddScoped<IProductService, ProductManager>(); 
@@ -48,6 +59,7 @@ builder.Services.AddScoped<IStatisticDal, EfCoreStatisticDal>();
 builder.Services.AddScoped<ITodoListService, TodoListManager>();
 builder.Services.AddScoped<ITodoListDal, EfCoreTodoListDal>();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -58,6 +70,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -68,5 +81,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Admin}/{action=Index}/{id?}");
+
+
+app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();

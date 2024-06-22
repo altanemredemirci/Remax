@@ -16,6 +16,8 @@
     </div>
 
     @await Component.InvokeAsync("_ScriptViewComponentPartial")
+
+    @await RenderSectionAsync("Scripts",false)
 </body>
 
 </html>
