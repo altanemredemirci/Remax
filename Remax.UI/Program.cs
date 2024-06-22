@@ -45,6 +45,9 @@ builder.Services.AddScoped<IMailDal, EfCoreMailDal>();
 builder.Services.AddScoped<IStatisticService, StatisticManager>();
 builder.Services.AddScoped<IStatisticDal, EfCoreStatisticDal>();
 
+builder.Services.AddScoped<ITodoListService, TodoListManager>();
+builder.Services.AddScoped<ITodoListDal, EfCoreTodoListDal>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -64,6 +67,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Category}/{action=Index}/{id?}");
+    pattern: "{controller=Admin}/{action=Index}/{id?}");
 
 app.Run();

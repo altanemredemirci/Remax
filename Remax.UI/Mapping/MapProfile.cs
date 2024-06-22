@@ -7,6 +7,7 @@ using Remax.BLL.DTOs.MailDTO;
 using Remax.BLL.DTOs.ProductDetailDTO;
 using Remax.BLL.DTOs.ProductDTO;
 using Remax.BLL.DTOs.SliderDTO;
+using Remax.BLL.DTOs.TodoListDTO;
 using Remax.BLL.DTOs.WhoWeAreDTO;
 using Remax.Entity;
 
@@ -41,6 +42,9 @@ namespace Remax.UI.Mapping
             CreateMap<WhoWeAre, UpdateWhoWeAreDTO>().ReverseMap();
 
             CreateMap<Mail, ResultMailDTO>().ReverseMap();
+
+            CreateMap<TodoList, ResultTodoListDTO>().ReverseMap();
+
 
         }
     }
