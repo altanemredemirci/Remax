@@ -17,4 +17,9 @@
     <ProjectReference Include="..\Remax.Entity\Remax.Entity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Agency\Data\" />
+    <Folder Include="Areas\Agency\Models\" />
+  </ItemGroup>
+
 </Project>

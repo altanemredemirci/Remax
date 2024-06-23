@@ -1,0 +1,86 @@
+﻿@using Remax.BLL.DTOs.ProductDTO
+@model List<ResultProductDTO>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Agency/Views/LayoutAgency/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Emlak Listesi</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <a href="/Product/Create" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-plus"></i> Yeni İlan
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Resim</th>
+                            <th>Başlık</th>
+                            <th>Fiyat</th>
+                            <th>Şehir</th>
+                            <th>İlçe</th>
+                            <th>Adres</th>
+                            <th>Popüler</th>
+                            <th>İlan Türü</th>
+                            <th>Kategori Adı</th>
+                            <th>Acenta Adı</th>
+                            <th>Durum</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pr in Model)
+                        {
+                            <tr>
+                                <td>@pr.Id</td>
+                                <td><img class="img-fluid" src="~/realestate/img/@pr.CoverImage" alt="Icon"></td>
+                                <td>@pr.Title</td>
+                                <td>@pr.Price</td>
+                                <td>@pr.City.Name</td>
+                                <td>@pr.District</td>
+                                <td>@pr.Address</td>
+                                <td>@pr.IsFavorite</td>
+                                <td>@pr.Type</td>
+                                <td>@pr.Category.Name</td>
+                                <td>@pr.Agency.Name</td>
+                                <td>
+                                    @if (pr.Status == true)
+                                    {
+                                        <a href="/Product/StatusChange?id=@pr.Id" class="btn btn-outline-warning btn-sm">Pasif Et</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Product/StatusChange?id=@pr.Id" class="btn btn-outline-success btn-sm">Aktif Et</a>
+                                    }
+                                </td>
+
+
+                                <td><a href="/Product/Edit?id=@pr.Id" class="btn btn-outline-warning btn-sm">Güncelle</a></td>
+                                <td><a href="/Product/Delete?id=@pr.Id" class="btn btn-outline-danger btn-sm">Sil</a></td>
+                                <td><a href="/Home/ProductDetail?id=@pr.Id" class="btn btn-outline-info btn-sm">Sitede Gör</a></td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+

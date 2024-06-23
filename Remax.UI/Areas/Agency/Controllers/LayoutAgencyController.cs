@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Remax.UI.Controllers
+namespace Remax.UI.Areas.Agency.Controllers
 {
-    public class TestController : Controller
+    public class LayoutAgencyController : Controller
     {
         public IActionResult Index()
         {

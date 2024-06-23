@@ -23,7 +23,7 @@ builder.Services.AddCors(opt =>
 builder.Services.AddSignalR();
 
 //DEPENDENCY INJECTION
-builder.Services.AddScoped<IProductService, ProductManager>(); 
+builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<IProductDal, EfCoreProductDal>();
 
 builder.Services.AddScoped<IProductDetailService, ProductDetailManager>();
@@ -81,6 +81,25 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Admin}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "kategoriler",
+    pattern: "kategoriler",
+    defaults: new {controller="Category", action="Index"});
+
+app.MapControllerRoute(
+    name: "kategori",
+    pattern: "kategori/edit/{id?}",
+    defaults: new { controller = "Category", action = "Edit" });
+
+
+
+app.MapControllerRoute(
+name: "advert",
+pattern: "advert/product",
+defaults: "{area:exists}/{controller=Adverts}/{action=Index}/{id?}"
+            );
+
 
 
 app.MapHub<SignalRHub>("/signalrhub");

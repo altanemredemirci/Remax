@@ -26,7 +26,7 @@ namespace Remax.BLL.Concrete
 
         public void Delete(TodoList entity)
         {
-            throw new NotImplementedException();
+            _todoListDal.Delete(entity);
         }
 
         public List<TodoList> GetAll(Expression<Func<TodoList, bool>> filter = null)
@@ -36,7 +36,7 @@ namespace Remax.BLL.Concrete
 
         public TodoList GetById(int id)
         {
-            throw new NotImplementedException();
+            return _todoListDal.GetById(id);
         }
 
         public TodoList GetOne(Expression<Func<TodoList, bool>> filter = null)

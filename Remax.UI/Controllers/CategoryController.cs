@@ -6,6 +6,7 @@ using Remax.Entity;
 
 namespace Remax.UI.Controllers
 {
+    
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -17,6 +18,7 @@ namespace Remax.UI.Controllers
             _mapper = mapper;
         }
 
+        [Route("kategoriler")]
         public IActionResult Index()
         {
             var categories =_categoryService.GetAll();
@@ -50,7 +52,7 @@ namespace Remax.UI.Controllers
             return View(model);
         }
 
-
+        [Route("kategori/edit/{id?}")]
         public IActionResult Edit(int id)
         {
             var cat =_categoryService.GetById(id);
