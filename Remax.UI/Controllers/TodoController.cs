@@ -43,5 +43,14 @@ namespace Remax.UI.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
+
+        public IActionResult StatusChange(int id)
+        {
+            var todoList = _todoListService.GetById(id);
+            todoList.Status = todoList.Status == true ? false : true;
+            _todoListService.Update(todoList);
+            return Json(todoList);
+        }
+
     }
 }

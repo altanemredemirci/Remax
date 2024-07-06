@@ -27,7 +27,7 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </span>
                         <div class="icheck-primary d-inline ml-2">
-                            <input type="checkbox" value="" name="todo@(i+1)" id="todoCheck@(i+1)" @(Model[i].Status ? "checked":"")>
+                            <input type="checkbox" value="" name="todo@(i+1)" id="todoCheck@(i+1)" @(Model[i].Status ? "checked" : "") onchange="statusChange(${todo.id})">
                             <label for="todoCheck@(i+1)"></label>
                         </div>
                         <span class="text">@Model[i].Description</span>
@@ -145,7 +145,7 @@
 
         // AJAX çağrısı
         $.ajax({
-            url: '/TodoList/StatusChange',
+            url: '/Todo/StatusChange',
             type: 'GET',
             data: { "id": id },
             success: function (data) {

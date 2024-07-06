@@ -46,7 +46,7 @@ namespace Remax.BLL.Concrete
 
         public void Update(TodoList entity)
         {
-            throw new NotImplementedException();
+            _todoListDal.Update(entity);
         }
     }
 }
